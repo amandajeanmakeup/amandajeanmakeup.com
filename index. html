@@ -1,0 +1,862 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amanda Jean Makeup | Luxury Bridal & Event Makeup Artist | DMV</title>
+  <meta name="description" content="Amanda Jean Makeup — luxury bridal and event makeup artist serving the DMV area. 8 years experience, LA trained. Bridal trials, wedding day, and special occasion makeup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0d0d0d;
+      --charcoal: #161616;
+      --dark: #1e1e1e;
+      --mid: #2a2a2a;
+      --gold: #c9a96e;
+      --gold-light: #e8d5b0;
+      --gold-dim: #8a6f45;
+      --cream: #f5f0e8;
+      --white: #faf8f4;
+      --text-muted: #888;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    .cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring.hover { width: 52px; height: 52px; border-color: var(--gold); opacity: 0.6; }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    nav.scrolled { background: rgba(13,13,13,0.95); padding: 18px 48px; backdrop-filter: blur(12px); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--cream);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: none;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 1px; background: var(--cream); transition: all 0.3s ease; }
+    .page { display: none; min-height: 100vh; }
+    .page.active { display: block; }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1510 50%, #0d0b08 100%);
+    }
+    .hero-lines { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+    .hero-lines::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: 8%;
+      width: 1px; height: 140%;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim) 30%, var(--gold-dim) 70%, transparent);
+      opacity: 0.3;
+      animation: lineDrop 1.8s ease forwards;
+    }
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      top: -20%; right: 18%;
+      width: 1px; height: 140%;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim) 40%, transparent);
+      opacity: 0.15;
+      animation: lineDrop 2.2s ease forwards;
+    }
+    @keyframes lineDrop { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+      max-width: 900px;
+      animation: fadeUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: 0.3s;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 32px;
+      letter-spacing: -0.01em;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 16px 36px;
+      text-decoration: none;
+      cursor: none;
+      transition: background 0.3s ease, gap 0.3s ease;
+    }
+    .hero-cta:hover { background: var(--gold-light); gap: 24px; }
+    .hero-cta::after { content: '→'; font-size: 0.8rem; }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px; right: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: fadeUp 1.5s ease forwards;
+      opacity: 0;
+      animation-delay: 1s;
+    }
+    .hero-scroll::after { content: ''; display: block; width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    .marquee-section { border-top: 1px solid var(--mid); border-bottom: 1px solid var(--mid); padding: 20px 0; overflow: hidden; background: var(--charcoal); }
+    .marquee-track { display: flex; animation: marquee 20s linear infinite; white-space: nowrap; }
+    .marquee-track span { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: var(--gold-dim); padding: 0 40px; letter-spacing: 0.1em; }
+    .marquee-track span.dot { color: var(--gold); font-style: normal; padding: 0 8px; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .intro-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; background: var(--charcoal); }
+    .intro-text { padding: 120px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .intro-heading { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 32px; }
+    .intro-heading em { font-style: italic; color: var(--gold-light); }
+    .intro-body { font-size: 0.82rem; line-height: 1.9; color: var(--text-muted); max-width: 420px; margin-bottom: 40px; }
+    .text-link { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; cursor: none; transition: gap 0.3s ease; }
+    .text-link:hover { gap: 18px; }
+    .text-link::after { content: '→'; }
+    .intro-visual { background: var(--dark); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .intro-visual::before { content: ''; position: absolute; top: 32px; left: 32px; width: 40px; height: 40px; border-top: 1px solid var(--gold-dim); border-left: 1px solid var(--gold-dim); z-index: 2; opacity: 0.5; }
+    .intro-visual::after { content: ''; position: absolute; bottom: 32px; right: 32px; width: 40px; height: 40px; border-bottom: 1px solid var(--gold-dim); border-right: 1px solid var(--gold-dim); z-index: 2; opacity: 0.5; }
+    .placeholder-art { text-align: center; padding: 48px; }
+    .placeholder-art .art-text { font-family: var(--serif); font-size: clamp(4rem, 10vw, 8rem); font-style: italic; color: var(--mid); line-height: 1; user-select: none; }
+    .placeholder-art .art-note { font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-top: 24px; }
+    .stats-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--mid); }
+    .stat-item { padding: 64px 48px; border-right: 1px solid var(--mid); text-align: center; }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 300; color: var(--gold); line-height: 1; display: block; }
+    .stat-label { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 12px; display: block; }
+    .categories-section { padding: 120px 48px; background: var(--black); }
+    .categories-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+    .categories-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--white); line-height: 1.1; }
+    .categories-title em { font-style: italic; color: var(--gold-light); }
+    .categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid); }
+    .category-card { background: var(--charcoal); padding: 56px 40px; position: relative; overflow: hidden; cursor: none; transition: background 0.4s ease; }
+    .category-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .category-card:hover { background: var(--dark); }
+    .category-card:hover::before { transform: scaleX(1); }
+    .category-num { font-family: var(--serif); font-size: 4rem; font-weight: 300; color: var(--mid); line-height: 1; margin-bottom: 32px; transition: color 0.4s ease; }
+    .category-card:hover .category-num { color: var(--gold-dim); }
+    .category-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--white); margin-bottom: 16px; }
+    .category-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.8; }
+    .about-hero { min-height: 60vh; display: flex; align-items: flex-end; padding: 160px 48px 80px; position: relative; overflow: hidden; background: var(--charcoal); }
+    .about-hero-bg { position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,13,13,0.95) 40%, rgba(13,13,13,0.4)), linear-gradient(160deg, var(--dark) 0%, var(--black) 100%); }
+    .about-hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .about-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; line-height: 0.95; color: var(--white); margin-bottom: 32px; }
+    .about-title em { font-style: italic; color: var(--gold-light); }
+    .about-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--black); }
+    .about-copy { padding: 100px 64px; border-right: 1px solid var(--mid); }
+    .about-copy p { font-size: 0.82rem; line-height: 1.95; color: var(--text-muted); margin-bottom: 28px; }
+    .about-copy p strong { color: var(--cream); font-weight: 400; }
+    .about-credentials { padding: 100px 64px; }
+    .credential-item { padding: 32px 0; border-bottom: 1px solid var(--mid); }
+    .credential-item:last-child { border-bottom: none; }
+    .credential-label { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .credential-value { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; color: var(--white); }
+    .philosophy-section { padding: 120px 48px; background: var(--charcoal); text-align: center; }
+    .philosophy-quote { font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2.8rem); font-weight: 300; font-style: italic; color: var(--white); max-width: 800px; margin: 0 auto 32px; line-height: 1.4; }
+    .philosophy-attr { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); }
+    .services-hero { padding: 160px 48px 80px; background: var(--charcoal); border-bottom: 1px solid var(--mid); }
+    .services-hero-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; line-height: 0.95; color: var(--white); max-width: 700px; }
+    .services-hero-title em { font-style: italic; color: var(--gold-light); }
+    .services-body { padding: 80px 48px 120px; }
+    .service-block { display: grid; grid-template-columns: 280px 1fr; gap: 0; border-bottom: 1px solid var(--mid); padding: 64px 0; }
+    .service-block:first-child { padding-top: 0; }
+    .service-meta { padding-right: 48px; }
+    .service-type { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .service-name { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--white); margin-bottom: 8px; line-height: 1.2; }
+    .service-price { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--gold); display: block; margin-top: 20px; }
+    .service-price-note { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 4px; }
+    .service-details { padding-left: 48px; border-left: 1px solid var(--mid); }
+    .service-desc { font-size: 0.82rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 28px; }
+    .service-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .service-includes li { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 12px; align-items: flex-start; }
+    .service-includes li::before { content: '—'; color: var(--gold-dim); flex-shrink: 0; margin-top: 1px; }
+    .terms-section { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background-color: var(--mid); }
+    .term-item { background: var(--charcoal); padding: 48px; }
+    .term-label { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .term-value { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--white); line-height: 1.5; }
+    .term-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; line-height: 1.7; }
+    .gallery-hero { padding: 160px 48px 80px; background: var(--charcoal); border-bottom: 1px solid var(--mid); }
+    .gallery-hero-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; color: var(--white); line-height: 0.95; }
+    .gallery-hero-title em { font-style: italic; color: var(--gold-light); }
+    .gallery-filter { display: flex; border-bottom: 1px solid var(--mid); }
+    .filter-btn { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); background: none; border: none; padding: 24px 40px; cursor: none; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
+    .filter-btn.active, .filter-btn:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--mid); padding: 2px; }
+    .gallery-item { background: var(--dark); aspect-ratio: 3/4; position: relative; overflow: hidden; cursor: none; }
+    .gallery-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(13,13,13,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease; }
+    .gallery-overlay-text { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--gold-light); letter-spacing: 0.05em; }
+    .gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+    .gallery-placeholder .ph-icon { font-family: var(--serif); font-size: 2.5rem; font-style: italic; color: var(--mid); }
+    .gallery-placeholder .ph-label { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: #333; }
+    .contact-hero { padding: 160px 48px 80px; background: var(--charcoal); border-bottom: 1px solid var(--mid); }
+    .contact-hero-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; color: var(--white); line-height: 0.95; max-width: 600px; }
+    .contact-hero-title em { font-style: italic; color: var(--gold-light); }
+    .contact-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+    .contact-info { padding: 80px 64px; border-right: 1px solid var(--mid); display: flex; flex-direction: column; gap: 56px; }
+    .contact-block-label { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .contact-block-value { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--white); line-height: 1.6; }
+    .contact-block-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; line-height: 1.7; }
+    .contact-form { padding: 80px 64px; display: flex; flex-direction: column; gap: 32px; }
+    .form-group { display: flex; flex-direction: column; gap: 10px; }
+    .form-group label { font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    .form-group input, .form-group select, .form-group textarea { background: var(--charcoal); border: 1px solid var(--mid); color: var(--cream); font-family: var(--sans); font-size: 0.8rem; padding: 16px 20px; outline: none; transition: border-color 0.3s ease; -webkit-appearance: none; border-radius: 0; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold-dim); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group select option { background: var(--dark); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-submit { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); background: var(--gold); border: none; padding: 18px 40px; cursor: none; transition: background 0.3s ease; align-self: flex-start; }
+    .form-submit:hover { background: var(--gold-light); }
+    .form-note { font-size: 0.7rem; color: var(--text-muted); line-height: 1.7; }
+    .form-note strong { color: var(--cream); }
+    footer { background: var(--charcoal); border-top: 1px solid var(--mid); padding: 64px 48px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: start; }
+    .footer-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.1em; color: var(--white); margin-bottom: 12px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline { font-size: 0.7rem; color: var(--text-muted); line-height: 1.7; }
+    .footer-nav-title, .footer-social-title { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a, .footer-social-links a { font-size: 0.75rem; color: var(--text-muted); text-decoration: none; cursor: none; transition: color 0.3s ease; }
+    .footer-nav a:hover, .footer-social-links a:hover { color: var(--cream); }
+    .footer-social-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-bottom { background: var(--black); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--mid); }
+    .footer-copy { font-size: 0.62px; color: #444; letter-spacing: 0.05em; }
+    .footer-copy span { color: var(--gold-dim); }
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: var(--black); align-items: center; justify-content: center; gap: 32px; z-index: 99; }
+      .nav-links.open a { font-size: 1rem; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 24px 60px; }
+      .hero-title { font-size: clamp(2.8rem, 12vw, 5rem); }
+      .hero-scroll { display: none; }
+      .intro-section { grid-template-columns: 1fr; }
+      .intro-text { padding: 80px 24px; }
+      .intro-visual { display: none; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--mid); }
+      .categories-section { padding: 80px 24px; }
+      .categories-grid { grid-template-columns: 1fr; }
+      .categories-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .about-hero { padding: 120px 24px 60px; }
+      .about-body { grid-template-columns: 1fr; }
+      .about-copy { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--mid); }
+      .about-credentials { padding: 60px 24px; }
+      .services-hero { padding: 120px 24px 60px; }
+      .services-body { padding: 40px 24px 80px; }
+      .service-block { grid-template-columns: 1fr; }
+      .service-meta { padding-right: 0; margin-bottom: 32px; }
+      .service-details { padding-left: 0; border-left: none; border-top: 1px solid var(--mid); padding-top: 32px; }
+      .terms-section { grid-template-columns: 1fr; }
+      .gallery-hero { padding: 120px 24px 60px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-filter { overflow-x: auto; }
+      .contact-hero { padding: 120px 24px 60px; }
+      .contact-body { grid-template-columns: 1fr; }
+      .contact-info { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--mid); }
+      .contact-form { padding: 60px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; padding: 60px 24px 40px; }
+      .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <nav id="mainNav">
+    <a href="#" class="nav-logo" onclick="showPage('home')">Amanda<span>Jean</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="showPage('home')" class="nav-link" data-page="home">Home</a></li>
+      <li><a href="#" onclick="showPage('about')" class="nav-link" data-page="about">About</a></li>
+      <li><a href="#" onclick="showPage('services')" class="nav-link" data-page="services">Services</a></li>
+      <li><a href="#" onclick="showPage('gallery')" class="nav-link" data-page="gallery">Gallery</a></li>
+      <li><a href="#" onclick="showPage('contact')" class="nav-link" data-page="contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="page active" id="home">
+    <section style="position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end;">
+      <div class="hero-bg"></div>
+      <div class="hero-lines"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">DMV Luxury Makeup Artist</p>
+        <h1 class="hero-title">Art that<br>belongs on<br><em>your face.</em></h1>
+        <p class="hero-sub">Bridal · Editorial · Special Occasion · DMV & Beyond</p>
+        <a href="#" class="hero-cta" onclick="showPage('contact')">Book a Consultation</a>
+      </div>
+      <div class="hero-scroll">Scroll</div>
+    </section>
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <span>Bridal Makeup</span><span class="dot">◆</span>
+        <span>8 Years Experience</span><span class="dot">◆</span>
+        <span>LA Trained</span><span class="dot">◆</span>
+        <span>Skin-First Philosophy</span><span class="dot">◆</span>
+        <span>DMV & Destination Weddings</span><span class="dot">◆</span>
+        <span>Timeless Over Trendy</span><span class="dot">◆</span>
+        <span>Bridal Makeup</span><span class="dot">◆</span>
+        <span>8 Years Experience</span><span class="dot">◆</span>
+        <span>LA Trained</span><span class="dot">◆</span>
+        <span>Skin-First Philosophy</span><span class="dot">◆</span>
+        <span>DMV & Destination Weddings</span><span class="dot">◆</span>
+        <span>Timeless Over Trendy</span><span class="dot">◆</span>
+      </div>
+    </div>
+    <section class="intro-section">
+      <div class="intro-text">
+        <p class="section-label">The Artist</p>
+        <h2 class="intro-heading">Makeup rooted<br>in <em>technique,</em><br>not trends.</h2>
+        <p class="intro-body">Amanda Jean Prestipino brings 8 years of professional experience and formal training from a nationally accredited makeup school in Los Angeles. Her foundation isn't trends — it's skin theory, face structure, color balance, longevity, and lighting. Every look is built to last, to photograph beautifully, and to feel completely like you.</p>
+        <a href="#" class="text-link" onclick="showPage('about')">Meet Amanda</a>
+      </div>
+      <div class="intro-visual">
+        <div class="placeholder-art">
+          <div class="art-text">AJ</div>
+          <p class="art-note">Add your photo here</p>
+        </div>
+      </div>
+    </section>
+    <div class="stats-strip">
+      <div class="stat-item"><span class="stat-number">8</span><span class="stat-label">Years Experience</span></div>
+      <div class="stat-item"><span class="stat-number">LA</span><span class="stat-label">Accredited Training</span></div>
+      <div class="stat-item"><span class="stat-number">DMV</span><span class="stat-label">Based & Available Beyond</span></div>
+    </div>
+    <section class="categories-section">
+      <div class="categories-header">
+        <h2 class="categories-title">Services<br>offered</h2>
+        <a href="#" class="text-link" onclick="showPage('services')">View all services</a>
+      </div>
+      <div class="categories-grid">
+        <div class="category-card" onclick="showPage('services')">
+          <div class="category-num">01</div>
+          <div class="category-name">Bridal</div>
+          <p class="category-desc">Trials, wedding day services, and bridal party packages. Starting at $150 per person.</p>
+        </div>
+        <div class="category-card" onclick="showPage('services')">
+          <div class="category-num">02</div>
+          <div class="category-name">Special Occasion</div>
+          <p class="category-desc">Galas, graduations, anniversaries, and any moment that deserves a great face.</p>
+        </div>
+        <div class="category-card" onclick="showPage('services')">
+          <div class="category-num">03</div>
+          <div class="category-name">Lessons</div>
+          <p class="category-desc">One-on-one instruction tailored to your face, your skills, and your goals.</p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">Amanda<span>Jean</span> Makeup</div>
+        <p class="footer-tagline">Luxury bridal and event makeup<br>for the DMV and beyond.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-title">Navigate</div>
+        <ul>
+          <li><a href="#" onclick="showPage('about')">About</a></li>
+          <li><a href="#" onclick="showPage('services')">Services & Pricing</a></li>
+          <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact & Book</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <div class="footer-social-title">Connect</div>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/amandajeanmakeup" target="_blank">Instagram</a>
+          <a href="mailto:hello@amandajeanmakeup.com">hello@amandajeanmakeup.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Amanda Jean Makeup. <span>amandajeanmakeup.com</span></span>
+    </div>
+  </div>
+  <div class="page" id="about">
+    <section class="about-hero">
+      <div class="about-hero-bg"></div>
+      <div class="about-hero-content">
+        <p class="section-label">About</p>
+        <h1 class="about-title">Where technique<br>meets <em>instinct.</em></h1>
+      </div>
+    </section>
+    <div class="about-body">
+      <div class="about-copy">
+        <p><strong>Amanda Jean Prestipino</strong> is a DMV-based luxury makeup artist with 8 years of professional experience and formal training from a nationally accredited makeup school in Los Angeles.</p>
+        <p>Her foundation is technical — rooted in skin theory, face structure, color balance, longevity, and lighting. Not just trends. She brings the precision of a trained professional and the intuition of an artist who has spent thousands of hours in the chair.</p>
+        <p>Amanda specializes in bridal and event makeup that looks timeless on camera and in person. Her approach is intentional, detail-driven, and deeply personal. She reads faces the way a sculptor reads form — finding what enhances rather than what changes.</p>
+        <p>Every client sits down as themselves and leaves as the <strong>best version of themselves.</strong> Not someone else's vision. Not whatever is trending on Instagram. Yours.</p>
+        <p>She serves brides and clients throughout the DMV and is available for destination weddings. For production and editorial work, reach out through the contact page.</p>
+      </div>
+      <div class="about-credentials">
+        <div class="credential-item"><div class="credential-label">Experience</div><div class="credential-value">8 Years Professional</div></div>
+        <div class="credential-item"><div class="credential-label">Training</div><div class="credential-value">Nationally Accredited School<br>Los Angeles, CA</div></div>
+        <div class="credential-item"><div class="credential-label">Specialization</div><div class="credential-value">Bridal · Event · Editorial</div></div>
+        <div class="credential-item"><div class="credential-label">Location</div><div class="credential-value">DMV Based<br>Available Nationwide</div></div>
+        <div class="credential-item"><div class="credential-label">Philosophy</div><div class="credential-value">Timeless over trendy.<br>Technical over surface.</div></div>
+      </div>
+    </div>
+    <section class="philosophy-section">
+      <p class="philosophy-quote">"I'm not here to put a face on you. I'm here to show you what was always there."</p>
+      <p class="philosophy-attr">— Amanda Jean Prestipino</p>
+    </section>
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">Amanda<span>Jean</span> Makeup</div>
+        <p class="footer-tagline">Luxury bridal and event makeup<br>for the DMV and beyond.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-title">Navigate</div>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('services')">Services & Pricing</a></li>
+          <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact & Book</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <div class="footer-social-title">Connect</div>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/amandajeanmakeup" target="_blank">Instagram</a>
+          <a href="mailto:hello@amandajeanmakeup.com">hello@amandajeanmakeup.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Amanda Jean Makeup. <span>amandajeanmakeup.com</span></span></div>
+  </div>
+  <div class="page" id="services">
+    <section class="services-hero">
+      <p class="section-label services-hero-label">Services & Pricing</p>
+      <h1 class="services-hero-title">Investment in<br>how you <em>feel.</em></h1>
+    </section>
+    <div class="services-body">
+      <div class="service-block">
+        <div class="service-meta">
+          <div class="service-type">Bridal</div>
+          <div class="service-name">Bridal Trial</div>
+          <span class="service-price">$350</span>
+          <div class="service-price-note">2.5 – 3 hours</div>
+        </div>
+        <div class="service-details">
+          <p class="service-desc">Your trial is where we get to know each other. We'll work through your inspiration images together, discuss your vision, and create a look that's entirely yours. You'll leave with a personalized lookbook and full confidence for your wedding day.</p>
+          <ul class="service-includes">
+            <li>2.5 to 3 hour session at a mutually agreed location</li>
+            <li>Personalized lookbook created from your inspiration</li>
+            <li>Full collaboration on vision and preferences</li>
+            <li>Opportunity to try different variations</li>
+            <li>Written look notes for wedding day consistency</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-block">
+        <div class="service-meta">
+          <div class="service-type">Bridal</div>
+          <div class="service-name">Wedding Day</div>
+          <span class="service-price">$200</span>
+          <div class="service-price-note">On-location</div>
+        </div>
+        <div class="service-details">
+          <p class="service-desc">Your wedding morning should be calm, joyful, and exactly what you envisioned. Amanda comes to you, bringing everything needed to recreate your trial look — flawlessly and on time.</p>
+          <ul class="service-includes">
+            <li>On-location service at your getting-ready venue</li>
+            <li>Travel included within first 30 miles ($1/mile beyond)</li>
+            <li>Touch-up kit provided for the day</li>
+            <li>Early start fee: $75 before 7:30am</li>
+            <li>Holiday rate: additional 10%</li>
+            <li>Second artist available from $150+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-block">
+        <div class="service-meta">
+          <div class="service-type">Bridal Party</div>
+          <div class="service-name">Bridesmaids & Guests</div>
+          <span class="service-price">$150</span>
+          <div class="service-price-note">Per person</div>
+        </div>
+        <div class="service-details">
+          <p class="service-desc">Beautiful looks for everyone in the room. Bridesmaids, mothers, and guests all receive the same level of care and attention that you do.</p>
+          <ul class="service-includes">
+            <li>Bridesmaids: $150 per person</li>
+            <li>Mothers of bride/groom: $150 per person</li>
+            <li>Additional guests: $150 per person</li>
+            <li>Junior bridesmaids: $75</li>
+            <li>Flower girls: complimentary</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-block">
+        <div class="service-meta">
+          <div class="service-type">Occasion</div>
+          <div class="service-name">Special Events</div>
+          <span class="service-price">Inquire</span>
+          <div class="service-price-note">Custom pricing</div>
+        </div>
+        <div class="service-details">
+          <p class="service-desc">Galas, anniversaries, graduations, photoshoots, and any occasion that deserves intentional, beautiful makeup. Reach out with your event details for a custom quote.</p>
+          <ul class="service-includes">
+            <li>One-on-one or group bookings available</li>
+            <li>On-location or in-studio</li>
+            <li>Custom timing and look</li>
+            <li>Available throughout the DMV</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-block">
+        <div class="service-meta">
+          <div class="service-type">Education</div>
+          <div class="service-name">Makeup Lessons</div>
+          <span class="service-price">Inquire</span>
+          <div class="service-price-note">1-on-1</div>
+        </div>
+        <div class="service-details">
+          <p class="service-desc">Learn to work with your face — your actual face, not a tutorial face. Amanda teaches the technical foundations that make your everyday makeup work.</p>
+          <ul class="service-includes">
+            <li>Customized to your skill level and goals</li>
+            <li>Learn techniques for your specific features</li>
+            <li>Product guidance and recommendations</li>
+            <li>Beginner through advanced</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="terms-section">
+      <div class="term-item"><div class="term-label">Booking Retainer</div><div class="term-value">40%</div><div class="term-note">Required to secure your date. Applied toward your total balance.</div></div>
+      <div class="term-item"><div class="term-label">Minimum</div><div class="term-value">$500</div><div class="term-note">Minimum booking applies to wedding day services.</div></div>
+      <div class="term-item"><div class="term-label">Balance Due</div><div class="term-value">24 Hours Before</div><div class="term-note">Final balance is due the day before your event.</div></div>
+      <div class="term-item"><div class="term-label">Trial Policy</div><div class="term-value">Non-Refundable</div><div class="term-note">Trial fees are non-refundable. All other policies available upon inquiry.</div></div>
+    </div>
+    <section style="padding:80px 48px;text-align:center;background:var(--charcoal);border-top:1px solid var(--mid);">
+      <p class="section-label" style="justify-content:center;">Ready?</p>
+      <h2 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--white);margin-bottom:32px;">Let's start with a conversation.</h2>
+      <a href="#" class="hero-cta" onclick="showPage('contact')">Get in Touch</a>
+    </section>
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">Amanda<span>Jean</span> Makeup</div>
+        <p class="footer-tagline">Luxury bridal and event makeup<br>for the DMV and beyond.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-title">Navigate</div>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('about')">About</a></li>
+          <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact & Book</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <div class="footer-social-title">Connect</div>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/amandajeanmakeup" target="_blank">Instagram</a>
+          <a href="mailto:hello@amandajeanmakeup.com">hello@amandajeanmakeup.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Amanda Jean Makeup. <span>amandajeanmakeup.com</span></span></div>
+  </div>
+  <div class="page" id="gallery">
+    <section class="gallery-hero">
+      <p class="section-label">Work</p>
+      <h1 class="gallery-hero-title">The work<br>speaks for <em>itself.</em></h1>
+    </section>
+    <div class="gallery-filter">
+      <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+      <button class="filter-btn" onclick="filterGallery('bridal', this)">Bridal</button>
+      <button class="filter-btn" onclick="filterGallery('before-after', this)">Before & After</button>
+      <button class="filter-btn" onclick="filterGallery('editorial', this)">Editorial</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="bridal"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Bridal Look</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Bridal</span></div></div>
+      <div class="gallery-item wide" data-cat="editorial"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Editorial</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Editorial</span></div></div>
+      <div class="gallery-item" data-cat="before-after"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Before & After</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Transformation</span></div></div>
+      <div class="gallery-item" data-cat="bridal"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Bridal Look</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Bridal</span></div></div>
+      <div class="gallery-item" data-cat="before-after"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Before & After</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Transformation</span></div></div>
+      <div class="gallery-item" data-cat="editorial"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Editorial</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Editorial</span></div></div>
+      <div class="gallery-item wide" data-cat="bridal"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Bridal Party</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Bridal Party</span></div></div>
+      <div class="gallery-item" data-cat="before-after"><div class="gallery-placeholder"><span class="ph-icon">✦</span><span class="ph-label">Before & After</span></div><div class="gallery-overlay"><span class="gallery-overlay-text">Transformation</span></div></div>
+    </div>
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">Amanda<span>Jean</span> Makeup</div>
+        <p class="footer-tagline">Luxury bridal and event makeup<br>for the DMV and beyond.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-title">Navigate</div>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('about')">About</a></li>
+          <li><a href="#" onclick="showPage('services')">Services & Pricing</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact & Book</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <div class="footer-social-title">Connect</div>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/amandajeanmakeup" target="_blank">Instagram</a>
+          <a href="mailto:hello@amandajeanmakeup.com">hello@amandajeanmakeup.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Amanda Jean Makeup. <span>amandajeanmakeup.com</span></span></div>
+  </div>
+  <div class="page" id="contact">
+    <section class="contact-hero">
+      <p class="section-label">Let's Talk</p>
+      <h1 class="contact-hero-title">Tell me about<br>your <em>day.</em></h1>
+    </section>
+    <div class="contact-body">
+      <div class="contact-info">
+        <div class="contact-block">
+          <div class="contact-block-label">Location</div>
+          <div class="contact-block-value">DMV Area<br>Maryland · Virginia · DC</div>
+          <div class="contact-block-sub">Available for destination weddings nationwide.</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Email</div>
+          <div class="contact-block-value">hello@amandajeanmakeup.com</div>
+          <div class="contact-block-sub">Response within 24–48 hours.</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Instagram</div>
+          <div class="contact-block-value">@amandajeanmakeup</div>
+          <div class="contact-block-sub">DMs welcome for quick questions.</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Booking</div>
+          <div class="contact-block-value">40% retainer secures your date</div>
+          <div class="contact-block-sub">$500 minimum. Balance due 24 hours before.</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label for="firstName">First Name</label><input type="text" id="firstName" placeholder="Your first name" /></div>
+          <div class="form-group"><label for="lastName">Last Name</label><input type="text" id="lastName" placeholder="Your last name" /></div>
+        </div>
+        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="your@email.com" /></div>
+        <div class="form-group">
+          <label for="service">Service Interested In</label>
+          <select id="service">
+            <option value="">Select a service...</option>
+            <option>Bridal Trial + Wedding Day</option>
+            <option>Wedding Day Only</option>
+            <option>Bridal Party (multiple people)</option>
+            <option>Special Occasion / Event</option>
+            <option>Makeup Lesson</option>
+            <option>Production / Editorial</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="eventDate">Event Date</label><input type="date" id="eventDate" /></div>
+          <div class="form-group">
+            <label for="partySize">Party Size</label>
+            <select id="partySize">
+              <option>Just me</option>
+              <option>2–3 people</option>
+              <option>4–6 people</option>
+              <option>7+ people</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label for="message">Tell me about your vision</label><textarea id="message" placeholder="Share your inspiration, style, venue, or anything you'd love me to know..."></textarea></div>
+        <p class="form-note">I'll respond within <strong>24–48 hours</strong> with availability and next steps.</p>
+        <button class="form-submit" onclick="submitForm()">Send Inquiry →</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">Amanda<span>Jean</span> Makeup</div>
+        <p class="footer-tagline">Luxury bridal and event makeup<br>for the DMV and beyond.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-title">Navigate</div>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('about')">About</a></li>
+          <li><a href="#" onclick="showPage('services')">Services & Pricing</a></li>
+          <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <div class="footer-social-title">Connect</div>
+        <div class="footer-social-links">
+          <a href="https://instagram.com/amandajeanmakeup" target="_blank">Instagram</a>
+          <a href="mailto:hello@amandajeanmakeup.com">hello@amandajeanmakeup.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 Amanda Jean Makeup. <span>amandajeanmakeup.com</span></span></div>
+  </div>
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+    document.querySelectorAll('a, button, .category-card, .gallery-item, input, select, textarea').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-link').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === id);
+      });
+      window.scrollTo(0, 0);
+      document.getElementById('navLinks').classList.remove('open');
+    }
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+    function submitForm() {
+      const name = document.getElementById('firstName').value;
+      const email = document.getElementById('email').value;
+      if (!name || !email) { alert('Please fill in your name and email.'); return; }
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('eventDate').value;
+      const size = document.getElementById('partySize').value;
+      const msg = document.getElementById('message').value;
+      const subject = encodeURIComponent('Makeup Inquiry — ' + (service || 'General'));
+      const body = encodeURIComponent('Name: ' + name + ' ' + document.getElementById('lastName').value + '\nEmail: ' + email + '\nService: ' + service + '\nEvent Date: ' + date + '\nParty Size: ' + size + '\n\nMessage:\n' + msg);
+      window.location.href = 'mailto:hello@amandajeanmakeup.com?subject=' + subject + '&body=' + body;
+    }
+    document.querySelector('[data-page="home"]').classList.add('active');
+  </script>
+</body>
+</html>
