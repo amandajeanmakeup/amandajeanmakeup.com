@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --oat:    #f4ede3;
@@ -1268,6 +1269,62 @@ function submitForm(){
     else{status.textContent="Something went wrong sending that. Please try again in a moment.";status.className="form-status err";btn.disabled=false;btn.textContent=orig;}
   }).catch(function(){status.textContent="Something went wrong sending that. Please try again in a moment.";status.className="form-status err";btn.disabled=false;btn.textContent=orig;});
 }
+</script>
+<style>
+.aj-note-overlay{position:fixed;inset:0;background:rgba(44,31,23,.42);display:none;justify-content:center;align-items:center;z-index:10000;padding:1.25rem;}
+.aj-note-overlay.is-open{display:flex;animation:ajNoteFade .6s var(--ease) both;}
+@keyframes ajNoteFade{from{opacity:0}to{opacity:1}}
+.aj-note{background:var(--oat);border:1px solid var(--esp);max-width:480px;width:100%;padding:3.25rem 2.5rem 2.5rem;position:relative;animation:ajNoteRise .7s .15s var(--ease) both;}
+@keyframes ajNoteRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.aj-note::before{content:"";position:absolute;inset:8px;border:1px solid var(--ciel);pointer-events:none;}
+.aj-note-close{position:absolute;top:1rem;right:1rem;z-index:2;background:none;border:none;cursor:pointer;font-family:var(--serif);font-size:1.4rem;line-height:1;color:var(--griotte);padding:.35rem .5rem;transition:opacity .4s var(--ease);}
+.aj-note-close:hover{opacity:.5}
+.aj-note-close:focus-visible{outline:1px solid var(--griotte);outline-offset:2px;}
+.aj-note-eyebrow{font-family:var(--sans);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--griotte);margin-bottom:1.4rem;}
+.aj-note-h{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.05;margin-bottom:1.4rem;color:var(--esp);}
+.aj-note-h em{font-style:italic;}
+.aj-note-body{font-family:var(--sans);font-size:.85rem;line-height:1.75;letter-spacing:.01em;color:var(--esp);margin-bottom:1.6rem;}
+.aj-note-body p+p{margin-top:.9rem;}
+.aj-note-signoff{font-family:'La Belle Aurore',cursive;font-size:1.35rem;color:var(--griotte);margin-bottom:1.8rem;}
+.aj-note-actions{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;}
+.aj-note-solid{background:var(--griotte);color:var(--oat);font-family:var(--sans);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;padding:.85rem 1.6rem;border:1px solid var(--griotte);text-decoration:none;transition:background .5s var(--ease),color .5s var(--ease);}
+.aj-note-solid:hover{background:transparent;color:var(--griotte);}
+.aj-note-text{font-family:var(--sans);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--esp);background:none;border:none;cursor:pointer;position:relative;padding:0 0 2px;}
+.aj-note-text::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--esp);transform:scaleX(1);transform-origin:left;transition:transform .5s var(--ease);}
+.aj-note-text:hover::after{transform:scaleX(0);}
+.aj-note-stamp{position:absolute;bottom:1.1rem;right:1.3rem;font-family:var(--sans);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ciel);}
+@media (prefers-reduced-motion:reduce){.aj-note-overlay,.aj-note{animation:none;}}
+@media (max-width:480px){.aj-note{padding:2.75rem 1.6rem 2.4rem;}}
+</style>
+<div class="aj-note-overlay" id="ajNoteOverlay" role="dialog" aria-modal="true" aria-labelledby="ajNoteTitle">
+  <div class="aj-note">
+    <button class="aj-note-close" id="ajNoteClose" aria-label="Close announcement">&#215;</button>
+    <div class="aj-note-eyebrow">A Note From Amanda</div>
+    <h2 class="aj-note-h" id="ajNoteTitle">The next <em>chapter.</em></h2>
+    <div class="aj-note-body">
+      <p>Big news: I'm relocating to California this summer and stepping into a new adventure in beauty. While I make the move, I'm temporarily closed to new bookings.</p>
+      <p>Thank you for eight incredible years in the DMV. This isn't goodbye.</p>
+    </div>
+    <div class="aj-note-signoff">xo, Amanda</div>
+    <div class="aj-note-actions">
+      <a class="aj-note-solid" href="https://instagram.com/amandajeanbrides" target="_blank" rel="noopener">Follow Along</a>
+      <button class="aj-note-text" id="ajNoteContinue">Continue to Site</button>
+    </div>
+    <div class="aj-note-stamp">est. 2017</div>
+  </div>
+</div>
+<script>
+(function(){
+  var ov=document.getElementById('ajNoteOverlay');
+  if(!ov)return;
+  function close(){ov.classList.remove('is-open');}
+  function open(){ov.classList.add('is-open');}
+  open();
+  document.getElementById('ajNoteClose').addEventListener('click',close);
+  document.getElementById('ajNoteContinue').addEventListener('click',close);
+  ov.addEventListener('click',function(e){if(e.target===ov)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
 </script>
 </body>
 </html>
